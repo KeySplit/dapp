@@ -268,6 +268,9 @@ var KeySplit = function () {
       encShard += c.final("base64");
       if (this.localStorage) {
         var shardList = JSON.parse(this.localStorage.getItem(this.account + ':shards'));
+        if (!shardList) {
+          shardList = [];
+        }
         if (shardList.indexOf(result.shardid.toString("hex")) < 0) {
           shardList.push(result.shardid.toString("hex"));
         }
