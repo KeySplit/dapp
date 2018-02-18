@@ -920,7 +920,7 @@ var KeySplitContractInterface = function () {
           for (var _iterator = shardList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var shard = _step.value;
 
-            getStorageConfirmed(shard);
+            _this.getStorageConfirmed(shard);
           }
         } catch (err) {
           _didIteratorError = true;

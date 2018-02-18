@@ -87,8 +87,8 @@
         <!-- Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    	<script src="js/index.browser.js"></script>
-    	<script src="js/inject.js"></script>
+    	<script src="../keysplit-dapp/dist/index.browser.js"></script>
+    	<script src="./js/inject.js"></script>
 
 		<script type="text/javascript">
 			function confirmStore() {
@@ -124,7 +124,9 @@
 			    	alert("Your password should be at least twelve (12) characters long.");
 			    	return false;
 			    } else {
-			    	app = new KeySplit.App({at:"0x95c9649FacB9eF51A6A64390E55Bfa6d624995AF", localStorage: window.localStorage})
+						if(typeof app === "undefined") {
+							app = new KeySplit.App({at:"0x95c9649FacB9eF51A6A64390E55Bfa6d624995AF", localStorage: window.localStorage})
+						}
 						app.account.then(function(address) {
 							$("#ethaddress").html(address);
 						})

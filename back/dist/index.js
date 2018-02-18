@@ -266,6 +266,9 @@ var KeySplit = function () {
       encShard += c.final("base64");
       if (this.localStorage) {
         var shardList = JSON.parse(this.localStorage.getItem(this.account + ':shards'));
+        if (!shardList) {
+          shardList = [];
+        }
         if (shardList.indexOf(result.shardid.toString("hex")) < 0) {
           shardList.push(result.shardid.toString("hex"));
         }
@@ -915,7 +918,7 @@ var KeySplitContractInterface = function () {
           for (var _iterator = shardList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var shard = _step.value;
 
-            getStorageConfirmed(shard);
+            _this.getStorageConfirmed(shard);
           }
         } catch (err) {
           _didIteratorError = true;

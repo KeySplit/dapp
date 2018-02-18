@@ -14,7 +14,7 @@ export class KeySplitContractInterface {
         var shardList = JSON.parse(this.localStorage.getItem(`${accounts[0]}:shards`));
         if(!shardList) { shardList = []; }
         for(var shard of shardList) {
-          getStorageConfirmed(shard);
+          this.getStorageConfirmed(shard);
         }
       });
     }
