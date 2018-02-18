@@ -20,6 +20,7 @@
 	            	<a class="navbar-brand" href="index.html">
 	            		<img class="logo" src="img/icLogoSmall.png">
 					</a>
+					<span id="ethaddress"></span>
 	                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ks-navbar-collapse-1">
 	                    <span class="sr-only">Toggle navigation</span>
 	                    <span class="icon-bar"></span>
@@ -72,6 +73,12 @@
 				  </div>
 				</div>
 			</div>
+			<div class="approveStorage hide">
+				You have been asked to store a friend's keys. Please confirm the transaction.
+				<br>
+				<button onclick="confirmStore()">Confirm</button><br>
+				<span id="etherscan-link"></span>
+			</div>
 	    <div class="footer">
 	    	<p>Made with love by Team KeySplit</p>
 	    	<p>ETHDenver 2018</p>
@@ -84,10 +91,29 @@
     	<script src="./js/inject.js"></script>
 
 		<script type="text/javascript">
+			function confirmStore() {
+				console.log("this");
+				app.confirmFromUrlHash().then(function(txHash) {
+					$("#etherscan-link").html("<a href='http://ropsten.etherscan.io/tx/" +  txHash +"'>View on etherscan</a>");
+					// $(".approveStorage").hide();
+					// $(".dashboard").removeClass("hide");
+				}).catch(console.log);;
+			}
 			function loadDashboard() {
 				$(".main").hide();
-				$(".dashboard").removeClass("hide");
-
+				if(window.location.hash) {
+					$(".approveStorage").removeClass("hide");
+				} else {
+					$(".dashboard").removeClass("hide");
+				}
+			}
+			function uploadSeed() {
+				app.splitSeedAndUpload($("#your-seed").val()).then(function(urls) {
+					var ol = $("#your-keys");
+					for(var url of urls) {
+						ol.append($("<li>"+url+"</li>"))
+					}
+				})
 			}
 			function validatePwd() {
 				var x = document.getElementById("pwd").value;
@@ -99,6 +125,9 @@
 			    	return false;
 			    } else {
 			    	app = new KeySplit.App({at:"0x95c9649FacB9eF51A6A64390E55Bfa6d624995AF", localStorage: window.localStorage})
+						app.account.then(function(address) {
+							$("#ethaddress").html(address);
+						})
 			    	app.hasAccount().then(function(result) {
 							if(result) {
 								app.signIn(x).then(function(val) {
@@ -111,10 +140,8 @@
 								});
 							} else {
 								app.signUp(x).then(function() {
-									if(val) {
 										console.log("Signed up");
 										loadDashboard();
-									}
 								});
 							}
 					});

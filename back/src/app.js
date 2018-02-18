@@ -67,7 +67,7 @@ export class App {
       this.engine.start()
     }
     this.PasswordManagement = new PasswordManagement(this.localStorage);
-    this.ContractInterface = new KeySplitContractInterface({web3: this.web3, at: options.at});
+    this.ContractInterface = new KeySplitContractInterface({web3: this.web3, at: options.at, localStorage: this.localStorage});
     this.KeySplitPromise = new Promise((resolve, reject) => {
       this.ksResolve = resolve;
       this.ksReject = reject;
@@ -87,7 +87,7 @@ export class App {
   }
   signUp(password) {
     return this.account.then((account) => {
-      this.ksResolve(new KeySplit({account: account, password: password}));
+      this.ksResolve(new KeySplit({account: account, password: password, localStorage: this.localStorage}));
       return this.PasswordManagement.storePass(password, account);
     })
   }
@@ -95,28 +95,28 @@ export class App {
     return this.account.then((account) => {
       var result = this.PasswordManagement.checkAccountPass(password, account);
       result.then(() => {
-        this.ksResolve(new KeySplit({account: account, password: password}));
+        this.ksResolve(new KeySplit({account: account, password: password, localStorage: this.localStorage}));
       });
       return result
     })
   }
   confirmFromUrlHash() {
-    return new Promise((resolve, reject) => {
-      var hash = window.location.hash.slice(1);
-      if(!hash) {
-        reject("No shard in url");
-      }
-      this.KeySplitPromise.then((KeySplit) => {
-        return KeySplit.downloadShard(hash).then((shardMnemonic) => {
-          return KeySplit.saveShard(shardMnemonic)
-        })
-      }).then((shardId) => {
-        return this.KeySplitContractInterface.confirmStoredShards();
+    var hash = window.location.hash.slice(1);
+    if(!hash) {
+      reject("No shard in url");
+    }
+    return this.KeySplitPromise.then((KeySplit) => {
+      return KeySplit.downloadShard(hash).then((shardMnemonic) => {
+        console.log("got here mnemonic");
+        return KeySplit.saveShard(shardMnemonic)
       })
+    }).then((shardId) => {
+      console.log("got here");
+      return this.ContractInterface.confirmStoredShards();
     })
   }
   splitSeedAndUpload(seed) {
-    this.KeySplitPromise.then((KeySplit) => {
+    return this.KeySplitPromise.then((KeySplit) => {
       return KeySplit.mnemonicToSSS(seed, 5, 3).then((mnemonicShards) => {
         var shards = [];
         for(var shard of mnemonicShards) {
@@ -127,19 +127,19 @@ export class App {
     }).then((results) => {
       var urls = [];
       for(var result of results) {
-        urls.push(`${window.location.origin}${window.location.pathame}#${result.objectid}:${result.key.toString("base64")}`);
+        urls.push(`${window.location.origin}${window.location.pathname}#${result.objectid.objectid}:${result.key.toString("base64")}`);
       }
       return urls;
     })
   }
   distributedShardData() {
-    return this.KeySplitContractInterface.getShardStatus()
+    return this.ContractInterface.getShardStatus()
   }
   heldShardData() {
     return getHeldShards();
   }
   getShardMnemonic(shardId) {
-    return this.KeySplitContractInterface.getShard(shardId);
+    return this.ContractInterface.getShard(shardId);
   }
   currentBlock() {
     return new Promise((resolve, reject) => {

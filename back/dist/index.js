@@ -122,7 +122,7 @@ var ApiEndpoint = function () {
     value: function upload(body) {
       return rp({
         method: 'POST',
-        uri: apiServer,
+        uri: this.apiServer,
         body: body,
         json: true
       });
@@ -289,11 +289,13 @@ var KeySplit = function () {
       objectid = _pathAndKey$split2[0];
       key = _pathAndKey$split2[1];
 
+      console.log(pathAndKey);
       return downloader.download(objectid).then(function (response) {
         console.log(objectid, key);
         var d = crypto.createDecipher("aes256", new Buffer(key, "base64"));
         var shardHex = d.update(response.data, "base64", "hex");
         shardHex += d.final("hex");
+        console.log(entropyToMnemonic(shardHex));
         return entropyToMnemonic(shardHex);
       });
     }
@@ -305,7 +307,7 @@ var KeySplit = function () {
       return new Promise(function (resolve, reject) {
         password = password || passwordStore[_this];
         var salt = crypto.randomBytes(8);
-        crypto.pbkdf2Sync(password, salt, 100000, 16, 'sha512', function (err, pbkdf2Pass) {
+        crypto.pbkdf2(password, salt, 100000, 16, 'sha512', function (err, pbkdf2Pass) {
           if (err) {
             reject(err);return;
           }
@@ -319,6 +321,9 @@ var KeySplit = function () {
           var shardId = hash.digest("hex");
           _this.localStorage.setItem('encShard:' + shardId, splitVal);
           var shardList = JSON.parse(_this.localStorage.getItem(_this.account + ':heldShards'));
+          if (!shardList) {
+            shardList = [];
+          }
           if (shardList.indexOf(shardId) < 0) {
             shardList.push(shardId);
           }
@@ -336,7 +341,7 @@ var KeySplit = function () {
         var splitVal = _this2.localStorage.getItem('encShard:' + shardId);
         var salt = new Buffer(splitVal.slice(0, 16), "hex");
         var encShard = splitVal.slice(16);
-        crypto.pbkdf2Sync(password, salt, 100000, 16, 'sha512', function (err, pbkdf2Pass) {
+        crypto.pbkdf2(password, salt, 100000, 16, 'sha512', function (err, pbkdf2Pass) {
           if (err) {
             reject(err);
           }
@@ -894,10 +899,14 @@ var KeySplitContractInterface = function () {
 
     this.web3 = options.web3;
     this.contract = this.web3.eth.contract(ShardStore.abi).at(options.at || "0x8cdaf0cd259887258bc13a92c0a6da92698644c0");
-
+    this.localStorage = options.localStorage;
     if (this.localStorage) {
       this.web3.eth.getAccounts(function (err, accounts) {
+        _this.account = accounts[0];
         var shardList = JSON.parse(_this.localStorage.getItem(accounts[0] + ":shards"));
+        if (!shardList) {
+          shardList = [];
+        }
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
@@ -993,33 +1002,7 @@ var KeySplitContractInterface = function () {
                 reject(err);
                 return;
               }
-              var confirmations = [];
-              var _iteratorNormalCompletion3 = true;
-              var _didIteratorError3 = false;
-              var _iteratorError3 = undefined;
-
-              try {
-                for (var _iterator3 = shardIds[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                  var shardId = _step3.value;
-
-                  confirmations.push(_this3.watchStorageConfirmed(shardId));
-                }
-              } catch (err) {
-                _didIteratorError3 = true;
-                _iteratorError3 = err;
-              } finally {
-                try {
-                  if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                    _iterator3.return();
-                  }
-                } finally {
-                  if (_didIteratorError3) {
-                    throw _iteratorError3;
-                  }
-                }
-              }
-
-              resolve(Promise.all(confirmations));
+              resolve(tx);
             });
           });
         });
@@ -1061,13 +1044,13 @@ var KeySplitContractInterface = function () {
           if (err) {
             reject(err);
           }
-          var _iteratorNormalCompletion4 = true;
-          var _didIteratorError4 = false;
-          var _iteratorError4 = undefined;
+          var _iteratorNormalCompletion3 = true;
+          var _didIteratorError3 = false;
+          var _iteratorError3 = undefined;
 
           try {
-            for (var _iterator4 = evts[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-              var evt = _step4.value;
+            for (var _iterator3 = evts[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              var evt = _step3.value;
 
               if (evt.blockNumber > shardData.block) {
                 if (_this5.localStorage) {
@@ -1077,16 +1060,16 @@ var KeySplitContractInterface = function () {
               }
             }
           } catch (err) {
-            _didIteratorError4 = true;
-            _iteratorError4 = err;
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                _iterator4.return();
+              if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
               }
             } finally {
-              if (_didIteratorError4) {
-                throw _iteratorError4;
+              if (_didIteratorError3) {
+                throw _iteratorError3;
               }
             }
           }
@@ -1109,28 +1092,28 @@ var KeySplitContractInterface = function () {
           }
           var shardIds = JSON.parse(shardJSON);
           var shards = [];
-          var _iteratorNormalCompletion5 = true;
-          var _didIteratorError5 = false;
-          var _iteratorError5 = undefined;
+          var _iteratorNormalCompletion4 = true;
+          var _didIteratorError4 = false;
+          var _iteratorError4 = undefined;
 
           try {
-            for (var _iterator5 = shardIds[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-              var shardId = _step5.value;
+            for (var _iterator4 = shardIds[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+              var shardId = _step4.value;
 
               var shard = JSON.parse(_this6.localStorage.getItem("shard:" + shardId));
               shard.update = _this6.watchStorageConfirmed(shardId);
             }
           } catch (err) {
-            _didIteratorError5 = true;
-            _iteratorError5 = err;
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                _iterator5.return();
+              if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                _iterator4.return();
               }
             } finally {
-              if (_didIteratorError5) {
-                throw _iteratorError5;
+              if (_didIteratorError4) {
+                throw _iteratorError4;
               }
             }
           }
@@ -1155,34 +1138,34 @@ var KeySplitContractInterface = function () {
         }
         var heldShards = JSON.parse(_this7.localStorage.getItem(_this7.account + ":heldShards"));
         var currentShards = [];
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+        var _iteratorNormalCompletion5 = true;
+        var _didIteratorError5 = false;
+        var _iteratorError5 = undefined;
 
         try {
-          for (var _iterator6 = heldShards[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-            var shardId = _step6.value;
+          for (var _iterator5 = heldShards[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+            var shardId = _step5.value;
 
-            if (_this7.localStorage.getItem("encShard" + shardId)) {
+            if (_this7.localStorage.getItem("encShard:" + shardId)) {
               currentShards.push(shardId);
             }
           }
         } catch (err) {
-          _didIteratorError6 = true;
-          _iteratorError6 = err;
+          _didIteratorError5 = true;
+          _iteratorError5 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion6 && _iterator6.return) {
-              _iterator6.return();
+            if (!_iteratorNormalCompletion5 && _iterator5.return) {
+              _iterator5.return();
             }
           } finally {
-            if (_didIteratorError6) {
-              throw _iteratorError6;
+            if (_didIteratorError5) {
+              throw _iteratorError5;
             }
           }
         }
 
-        return confirmStorage(currentShards);
+        resolve(_this7.confirmStorage(currentShards));
       });
     }
   }]);
@@ -1321,7 +1304,7 @@ var App = function () {
       this.engine.start();
     }
     this.PasswordManagement = new PasswordManagement(this.localStorage);
-    this.ContractInterface = new KeySplitContractInterface({ web3: this.web3, at: options.at });
+    this.ContractInterface = new KeySplitContractInterface({ web3: this.web3, at: options.at, localStorage: this.localStorage });
     this.KeySplitPromise = new Promise(function (resolve, reject) {
       _this.ksResolve = resolve;
       _this.ksReject = reject;
@@ -1352,7 +1335,7 @@ var App = function () {
       var _this3 = this;
 
       return this.account.then(function (account) {
-        _this3.ksResolve(new KeySplit({ account: account, password: password }));
+        _this3.ksResolve(new KeySplit({ account: account, password: password, localStorage: _this3.localStorage }));
         return _this3.PasswordManagement.storePass(password, account);
       });
     }
@@ -1364,7 +1347,7 @@ var App = function () {
       return this.account.then(function (account) {
         var result = _this4.PasswordManagement.checkAccountPass(password, account);
         result.then(function () {
-          _this4.ksResolve(new KeySplit({ account: account, password: password }));
+          _this4.ksResolve(new KeySplit({ account: account, password: password, localStorage: _this4.localStorage }));
         });
         return result;
       });
@@ -1374,24 +1357,24 @@ var App = function () {
     value: function confirmFromUrlHash() {
       var _this5 = this;
 
-      return new Promise(function (resolve, reject) {
-        var hash = window.location.hash.slice(1);
-        if (!hash) {
-          reject("No shard in url");
-        }
-        _this5.KeySplitPromise.then(function (KeySplit$$1) {
-          return KeySplit$$1.downloadShard(hash).then(function (shardMnemonic) {
-            return KeySplit$$1.saveShard(shardMnemonic);
-          });
-        }).then(function (shardId) {
-          return _this5.KeySplitContractInterface.confirmStoredShards();
+      var hash = window.location.hash.slice(1);
+      if (!hash) {
+        reject("No shard in url");
+      }
+      return this.KeySplitPromise.then(function (KeySplit$$1) {
+        return KeySplit$$1.downloadShard(hash).then(function (shardMnemonic) {
+          console.log("got here mnemonic");
+          return KeySplit$$1.saveShard(shardMnemonic);
         });
+      }).then(function (shardId) {
+        console.log("got here");
+        return _this5.ContractInterface.confirmStoredShards();
       });
     }
   }, {
     key: 'splitSeedAndUpload',
     value: function splitSeedAndUpload(seed) {
-      this.KeySplitPromise.then(function (KeySplit$$1) {
+      return this.KeySplitPromise.then(function (KeySplit$$1) {
         return KeySplit$$1.mnemonicToSSS(seed, 5, 3).then(function (mnemonicShards) {
           var shards = [];
           var _iteratorNormalCompletion = true;
@@ -1431,7 +1414,7 @@ var App = function () {
           for (var _iterator2 = results[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var result = _step2.value;
 
-            urls.push('' + window.location.origin + window.location.pathame + '#' + result.objectid + ':' + result.key.toString("base64"));
+            urls.push('' + window.location.origin + window.location.pathname + '#' + result.objectid.objectid + ':' + result.key.toString("base64"));
           }
         } catch (err) {
           _didIteratorError2 = true;
@@ -1454,7 +1437,7 @@ var App = function () {
   }, {
     key: 'distributedShardData',
     value: function distributedShardData() {
-      return this.KeySplitContractInterface.getShardStatus();
+      return this.ContractInterface.getShardStatus();
     }
   }, {
     key: 'heldShardData',
@@ -1464,7 +1447,7 @@ var App = function () {
   }, {
     key: 'getShardMnemonic',
     value: function getShardMnemonic(shardId) {
-      return this.KeySplitContractInterface.getShard(shardId);
+      return this.ContractInterface.getShard(shardId);
     }
   }, {
     key: 'currentBlock',

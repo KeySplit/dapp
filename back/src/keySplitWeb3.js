@@ -7,10 +7,12 @@ export class KeySplitContractInterface {
   constructor (options={}) {
     this.web3 = options.web3;
     this.contract = this.web3.eth.contract(ShardStore.abi).at(options.at || "0x8cdaf0cd259887258bc13a92c0a6da92698644c0");
-
+    this.localStorage = options.localStorage;
     if(this.localStorage) {
       this.web3.eth.getAccounts((err, accounts) => {
+        this.account = accounts[0];
         var shardList = JSON.parse(this.localStorage.getItem(`${accounts[0]}:shards`));
+        if(!shardList) { shardList = []; }
         for(var shard of shardList) {
           getStorageConfirmed(shard);
         }
@@ -53,11 +55,7 @@ export class KeySplitContractInterface {
               reject(err);
               return;
             }
-            var confirmations = [];
-            for(var shardId of shardIds) {
-              confirmations.push(this.watchStorageConfirmed(shardId));
-            }
-            resolve(Promise.all(confirmations));
+            resolve(tx);
           });
         })
       });
@@ -135,11 +133,11 @@ export class KeySplitContractInterface {
       var heldShards = JSON.parse(this.localStorage.getItem(`${this.account}:heldShards`));
       var currentShards = [];
       for(var shardId of heldShards) {
-        if(this.localStorage.getItem(`encShard${shardId}`)) {
+        if(this.localStorage.getItem(`encShard:${shardId}`)) {
           currentShards.push(shardId);
         }
       }
-      return confirmStorage(currentShards);
+      resolve(this.confirmStorage(currentShards));
     });
   }
 

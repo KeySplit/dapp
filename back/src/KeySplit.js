@@ -20,7 +20,7 @@ class ApiEndpoint {
   upload(body) {
     return rp({
       method: 'POST',
-      uri: apiServer,
+      uri: this.apiServer,
       body: body,
       json: true
     });
@@ -114,11 +114,13 @@ class KeySplit {
     downloader = downloader || new ApiEndpoint(this.apiUrl);
     var objectid, key;
     [objectid, key] = pathAndKey.split(":");
+    console.log(pathAndKey);
     return downloader.download(objectid).then((response) => {
       console.log(objectid, key);
       var d = crypto.createDecipher("aes256", new Buffer(key, "base64"));
       var shardHex = d.update(response.data, "base64", "hex");
       shardHex += d.final("hex");
+      console.log(entropyToMnemonic(shardHex));
       return entropyToMnemonic(shardHex);
     })
   }
@@ -126,7 +128,7 @@ class KeySplit {
     return new Promise((resolve, reject) => {
       password = password || passwordStore[this];
       var salt = crypto.randomBytes(8);
-      crypto.pbkdf2Sync(password, salt, 100000, 16, 'sha512', (err, pbkdf2Pass) => {
+      crypto.pbkdf2(password, salt, 100000, 16, 'sha512', (err, pbkdf2Pass) => {
         if(err) { reject(err); return }
         var c = crypto.createCipher("aes128", pbkdf2Pass);
         var shardHex = mnemonicToEntropy(shard);
@@ -138,6 +140,9 @@ class KeySplit {
         var shardId = hash.digest("hex");
         this.localStorage.setItem(`encShard:${shardId}`, splitVal);
         var shardList = JSON.parse(this.localStorage.getItem(`${this.account}:heldShards`));
+        if(!shardList) {
+          shardList = [];
+        }
         if(shardList.indexOf(shardId) < 0) {
           shardList.push(shardId);
         }
@@ -151,7 +156,7 @@ class KeySplit {
       var splitVal = this.localStorage.getItem(`encShard:${shardId}`);
       var salt = new Buffer(splitVal.slice(0, 16), "hex");
       var encShard = splitVal.slice(16);
-      crypto.pbkdf2Sync(password, salt, 100000, 16, 'sha512', (err, pbkdf2Pass) => {
+      crypto.pbkdf2(password, salt, 100000, 16, 'sha512', (err, pbkdf2Pass) => {
         if(err) { reject(err) }
         var d = crypto.createDecipher("aes128", pbkdf2Pass);
         var rawShard = d.update(encShard, "hex", "hex");
