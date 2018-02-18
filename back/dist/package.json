@@ -1,0 +1,29 @@
+{
+  "name": "KeySplit.js",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": "KeySplit hackathon team",
+  "contributors": [
+    "Austin Roberts",
+    "Nick Neuman",
+    "Mark Barasso"
+  ],
+  "license": "BSD",
+  "keywords": [],
+  "main": "dist/index.js",
+  "jsnext:main": "dist/index.es.js",
+  "dependencies": {
+    "babel-plugin-inline-json-import": "^0.2.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.11.6",
+    "bip39": "^2.5.0",
+    "browserify": "^14.5.0",
+    "ethereumjs-wallet": "git+https://github.com/ethereumjs/ethereumjs-wallet.git",
+    "request-promise-native": "^1.0.5",
+    "secrets.js-next": "^0.1.11",
+    "uuid": "^3.2.1",
+    "web3": "^0.20.5",
+    "web3-provider-engine": "^13.6.5"
+  }
+}

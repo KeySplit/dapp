@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "SF Text";
+}
+
+html, body {
+  height: 100%;
+  background-color: #fff;
+}
+
+body {
+  text-align: center;
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
+
+@media (max-width: 480px) {
+  body {
+    text-align: left;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    font: 20px "SF Text";
+  }
+}
+
+h1, h2, h3 {
+  float: center;
+  width: 100%;
+  display: block;
+  padding-top: 50px;
+  font-family: "SF Text";
+}
+
+@media (max-width: 480px) {
+  h1, h2, h3 {
+    float: left;
+    width: 100%;
+    display: block;
+    padding-top: 50px;
+    padding-left: 25px;
+    font-family: "SF Text";
+  }
+}
+
+p, li {
+  font-family: "SF Text";
+  color: #544949;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+/** Regular */
+@font-face {
+  font-family: "SF Text";
+  font-weight: 400;
+  src: url("../fonts/SF-UI-Text-Regular.otf");
+}
+
+/** Semibold */
+@font-face {
+  font-family: "SF Semibold Text";
+  font-weight: 600;
+  src: url("../fonts/SF-UI-Text-Semibold.otf");
+}
+
+.mainBtn {
+  float: center;
+  height: 44px;
+  width: 203px;
+  border: none;
+  border-radius: 4px;
+  font-size: 17px;
+  margin-top: 50px;
+  font-family: "SF Text";
+  color: rgb(255,255,255);
+  background-color: rgb(67,198,172);
+}
+
+@media (max-width: 480px) {
+  .mainBtn {
+    float: left;
+    height: 44px;
+    width: 203px;
+    border: none;
+    border-radius: 4px;
+    font-size: 17px;
+    margin-top: 50px;
+    margin-left: 25px;
+    font-family: "SF Text";
+    color: rgb(255,255,255);
+    background-color: rgb(67,198,172);
+  }
+}
+
+.nav {
+  height: 15%;
+}
+
+.main {
+  background-color: #fff;
+  width: 100%;
+  height: 90%;
+}
+
+.title {
+  font-size: 64px;
+  color: rgb(25,22,84);
+  font-family: "SF Semibold Text";
+}
+
+.secondtitle {
+  font-size: 28px;
+  margin-top: 100px;
+  color: rgb(25,22,84);
+  font-family: "SF Semibold Text";
+}
+
+.thirdtitle {
+  font-size: 28px;
+  margin-top: 50px;
+  color: rgb(25,22,84);
+  font-family: "SF Semibold Text";
+
+}
+
+.subtitle {
+  font-size: 16px;
+  color: rgb(25,22,84);
+}
+
+.link {
+  font-size: 16px;
+  color: rgb(67,198,172);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.footer {
+  float: center;
+  display: block;
+  text-align: center;
+  font-family: "SF Text";
+}
+
+.footer a {
+  color: rgb(67,198,172);
+}
+
+.footer a:hover {
+  text-decoration: none;
+}
+
+#shardContent #keyContent {
+  float: center;
+  text-align: center;
+}
+
+input {
+  width: 250px;
+  float: none;
+  text-align: center;
+}
+
+
+hide {
+  display: none;
+}

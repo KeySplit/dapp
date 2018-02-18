@@ -1,0 +1,1 @@
+require('./back/app.js');
