@@ -1,0 +1,115 @@
+.addkey{
+    margin: 20px;
+    .step-meter{
+
+        &.checked{
+            background: $teal;
+        }
+
+        height: 4px;
+        background: $grey;
+        justify-content: space-between;
+    }
+
+    .step1, .step2, .step3, .step4{
+        h1{
+            font-size: 36px;
+        }
+        p{
+            color: $darkblue;
+            font-family: 'Roboto-Light';
+        }
+        h4{
+            color: $darkblue;
+            font-family: 'Roboto-Light';
+            margin-bottom: 5px;
+        }
+        input{
+            width: 100%;
+            height: 40px;
+            border: 1px solid $grey;
+            border-radius: 4px;
+            padding: 0 5px;
+            font-size: 17px;
+            font-family: 'Roboto-Light';
+            margin-bottom: 10px;
+        }
+        textarea{
+            width: 100%;
+            height: 120px;
+            border: 1px solid $grey;
+            border-radius: 4px;
+            padding: 0 5px;
+            padding-top: 10px;
+            font-size: 17px;
+            font-family: 'Roboto-Light';
+            resize: none;
+            margin-bottom: 40px;
+        }
+
+        .share-tile{
+            position: relative;
+            box-sizing: border-box;
+            background: $lightgrey;
+            height: 100px;
+            width: 100%;
+            border-radius: 4px;
+            padding: 5px 10px;
+
+            h3{
+                margin: 0;
+            }
+
+            h4{
+                margin: 0;
+                color: $textgrey;
+            }
+
+            p{
+                margin-top: 10px;
+                color: $textgrey;
+                font-weight: bold;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;
+            }
+            span{
+                font-size: 10px;
+                color: $teal;
+                position: relative;
+                top: 10px;
+            }
+
+            img{
+                height: 25px;
+                float: right;
+                margin-top: 20px;
+            }
+        }
+    }
+    .step3{
+        p{
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .fl-row{
+            margin-top: 10px;
+        }
+    }
+
+    .step4{
+        img{
+            height: 130px;
+        }
+        p{
+            margin-top: 40px;
+            margin-bottom: 70px;
+        }
+
+        .low-opacity{
+            opacity: 0.6;
+        }
+    }
+}

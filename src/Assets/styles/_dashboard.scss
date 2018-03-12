@@ -1,0 +1,86 @@
+.dashboard{
+
+    .react-tabs__tab-list{
+        margin: 0;
+    }
+
+    ul{
+        font-size: 22px;
+        .react-tabs__tab--selected{
+            color: $teal;
+        }
+        li{
+            width: 40%;
+        }
+    }
+
+    button{
+        position: relative;
+        margin-top: 80px;
+    }
+
+    .panel{
+        box-sizing: border-box;
+        margin: 20px;
+        margin-top: 100px;
+
+        .mykeys-par, a{
+            font-size: 15px;
+        }
+
+        img{
+            height: 180px;
+        }
+    }
+
+    a{
+        color: $darkblue;
+    }
+
+    .key-row{
+        border-bottom: 1px solid $grey;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 800;
+
+        &:first-of-type{
+            border-top: 1px solid $grey;
+        }
+
+        .status-ball{
+            position: relative;
+            border-radius: 50%;
+            margin-left: 10px;
+            top: 2px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+
+
+            &.active{
+                background: $green;
+            }
+
+            &.warning{
+                background: $orange;
+            }
+
+            &.inactive{
+                background: $red;
+            }
+
+        }
+
+        img{
+            position: relative;
+            height: 15px;
+            right: 5px;
+        }
+
+    }
+
+    .shard-row{
+        font-size: 9.5px;
+    }
+
+}

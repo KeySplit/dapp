@@ -1,0 +1,36 @@
+.header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+
+    position: relative;
+    padding: 20px;
+
+    .logo{
+
+        grid-column-start: 1;
+        grid-column-end: 10;
+
+        img{
+            height: 25px;
+        }
+
+        span{
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            margin-left: 10px;
+            top: -5px;
+            color: $teal;
+        }
+    }
+
+    .menu{
+        grid-column: 10;
+        img{
+            float: right;
+            height: 30px;
+        }
+    }
+}

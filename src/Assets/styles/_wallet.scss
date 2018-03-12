@@ -1,0 +1,71 @@
+.wallet{
+
+    h1{
+        margin: 20px;
+        font-size: 36px;
+    }
+    p{
+        margin-left: 20px;
+    }
+
+    .key-row{
+        border-bottom: 1px solid $grey;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: 800;
+
+        &:first-of-type{
+            border-top: 1px solid $grey;
+        }
+
+        .status-ball{
+            position: relative;
+            border-radius: 50%;
+            margin-left: 10px;
+            top: 2px;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+
+
+            &.active{
+                background: $green;
+            }
+
+            &.warning{
+                background: $orange;
+            }
+
+            &.inactive{
+                background: $red;
+            }
+
+        }
+
+        img{
+            position: relative;
+            height: 15px;
+            right: 5px;
+            transform: rotate(90deg);
+        }
+
+
+
+        .collapsed-content{
+            .collapsed-message{
+                padding-top: 20px;
+                margin-left: 0;
+                font-size: 12px;
+                color: $red;
+            }
+            .collapsed-contact{
+                margin-left: 0;
+                font-size: 12px;
+            }
+        }
+
+    }
+    button{
+        margin-top: 80px;
+    }
+}

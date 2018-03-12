@@ -1,0 +1,25 @@
+
+@font-face {
+	font-family: 'Roboto';
+	src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+	font-family: 'Roboto-Light';
+	src: url(../fonts/Roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+	font-family: 'Roboto-Thin';
+	src: url(../fonts/Roboto/Roboto-Thin.ttf);
+}
+
+@font-face {
+	font-family: 'Roboto-Black';
+	src: url(../fonts/Roboto/Roboto-Black.ttf);
+}
+
+$r: 'Roboto', sans-serif;
+$rl: 'Roboto-Light', sans-serif;
+$rt: 'Roboto-Thin', sans-serif;
+$rb: 'Roboto-Black', sans-serif;

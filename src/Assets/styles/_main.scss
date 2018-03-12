@@ -1,0 +1,32 @@
+.main{
+    position: relative;
+    h1{
+        font-size: 70px;
+        color: $darkblue;
+    }
+    p{
+        color: $darkblue;
+        line-height: 1.4;
+    }
+
+    .learn-more{
+        color: $teal;
+        margin-top: 50px;
+    }
+
+    button{
+        height: 40px;
+        background: $teal;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        font-family: 'Roboto-Light';
+        padding: 10px 25px;
+        margin-top: 20px;
+    }
+
+}
+
+.landing{
+    margin: 20px;
+}
