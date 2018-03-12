@@ -1,0 +1,29 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  font-family: 'Roboto';
+  background: $bg;
+}
+
+a{
+    color: $teal;
+    text-decoration: none;
+}
+
+.main-container{
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: 60px auto;
+    grid-template-areas:
+        "header header header header"
+        "main main main main";
+}
+
+.main {
+    grid-area: main;
+}
