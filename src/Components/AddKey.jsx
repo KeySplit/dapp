@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 class AddKey extends Component {

@@ -89,7 +89,7 @@ class NoKeysPanel extends Component {
                     </div>
                     <div className="fl-70">
                         <p className="mykeys-par">You have no seed words securely stored with KeySplit.</p>
-                        <Link to="">I want to save my seed words</Link>
+                        <Link to="">Get started by adding a key below.</Link>
                     </div>
                 </div>
                 <center><button onClick={() => { this.props.history.push('/add-key/step1') }} className="create-account">ADD KEY</button></center>

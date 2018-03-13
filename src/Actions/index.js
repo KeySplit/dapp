@@ -1,5 +1,4 @@
 import * as actionType from './ActionType';
-import axios from 'axios';
 import Web3 from "web3";
 import crypto from 'crypto';
 
@@ -37,9 +36,12 @@ export const getETHaccount = () => {
             web3.eth.getAccounts((err, accounts) => {
                 if(err) {
                     reject(dispatch(failETHaccount(err)))
-                }
-                else{
-                    resolve(dispatch(successETHaccount(accounts[0])))
+                } else {
+                    if (accounts[0] === undefined) {
+                        resolve(dispatch(successETHaccount('undefined')))
+                    } else {
+                        resolve(dispatch(successETHaccount(accounts[0])))
+                    }
                 }
             })
         })

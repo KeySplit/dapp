@@ -5,6 +5,8 @@ import { hashPass } from '../Actions';
 
 class Create extends Component {
 
+    state = { errors: [] }
+
     constructor(props) {
         super(props);
     }
@@ -14,13 +16,14 @@ class Create extends Component {
     }
 
     createPass = () =>{
-        if(this.state.password.length !== 12){
-            console.log("password less than 12")
+        if(this.state.password.length < 12){
+            this.setState({errors: "Oops! Your password must be a minimum of 12 characters."});
         }
         else{
             this.props.hashPass(this.state.password)
             .then((result) => {
                 localStorage.setItem(`${this.props.account}:password`, JSON.stringify(result.hash));
+                this.setState({ errors: "" });
                 this.props.history.push('/dashboard')
             });
         }
@@ -38,6 +41,7 @@ class Create extends Component {
                         <input placeholder="Password (min 12 characters)" onChange={ this.handleChange } type="password" name="password" />
                     </div>
                 </div>
+                <center><div className="errors">{ this.state.errors }</div></center>
                 <center><button onClick={ this.createPass } className="create-account">CREATE ACCOUNT</button></center>
             </div>
         )

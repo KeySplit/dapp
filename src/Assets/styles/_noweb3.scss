@@ -1,0 +1,50 @@
+.noweb3{
+    position: relative;
+    h1{
+        font-size: 70px;
+        color: $darkblue;
+    }
+    h3{
+        font-size: 40px;
+        color: $darkblue;
+    }
+    p{
+        color: $darkblue;
+        line-height: 1.4;
+    }
+    button {
+        border-radius: 4px;
+        font-size: 16px;
+        font-family: 'Roboto-Light';
+        padding: 10px 25px;
+        margin-top: 20px;
+        color: white;
+    }
+    .download-metamask{
+        height: 40px;
+        background: $teal;
+    }
+    .download-toshi{
+        height: 40px;
+        background: $black;
+
+    }
+    .download-toshi i{
+        font-size: 40px;
+        position: absolute;
+        left: 10px;
+    }
+    .download-toshi .small{
+        display: block;
+        font-size: 12px;
+        line-height: 12px;
+        margin-bottom: 2px;
+        margin-top: 5px;
+    }
+    .download-toshi .big{
+        display: block;
+        text-align: left;
+        font-size: 21px;
+        line-height: 21px;
+    }
+}
