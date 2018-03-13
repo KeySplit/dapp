@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AddKey from '../Components/AddKey';
-
 import * as actions from '../Actions';
-
-import bip39 from 'bip39';
-import crypto from 'crypto';
-import secrets from 'secrets.js-next';
-
 import KeySplit from '../Keysplit/KeySplit';
 
 
@@ -30,18 +24,12 @@ class StepsContainer extends Component {
         console.log(data)
 
         if(step === 1){
-            // REMOVE: MAKING TESTING FAST
-            // data.nickname = 'iliogr-key';
-            // data.seed = mnemonic;
             this.props.step1(data);
-
             this.setState({mnemonic: data.seed, key: data.nickname});
             this.props.history.push('/add-key/step2');
         }
 
-
         else if(step === 2){
-
             let shards = [];
             let urls = [];
             localStorage.setItem(`${localStorage.account}:shards`, "[]");

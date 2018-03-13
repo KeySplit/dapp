@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getETHaccount } from '../Actions';
-import { getWeb3 } from '../Actions';
 import { bindActionCreators } from 'redux';
 import App from '../Components/App';
 
@@ -11,21 +10,21 @@ class GlobalContainer extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/create"){
-                    this.props.history.push('/dashboard');
+        if (typeof window.web3 === 'undefined' || typeof window.web3 === undefined){
+            this.props.history.push('/web3');
+        } else {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account){
+                    if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/create"){
+                        this.props.history.push('/dashboard');
+                    } else if(response.account === undefined || response.account === 'undefined'){
+                        this.props.history.push('/web3');
+                    } else {
+                        this.props.history.push('/');
+                    }
                 }
-                else if(!localStorage.getItem(`${response.account}:password`)){
-                    localStorage.account = response.account;
-                    this.props.history.push('/create');
-                }
-            }
-            else{
-                console.log("DID NOT GET AN ACCOUNT")
-                this.props.history.push('/create');
-            }
-        });
+            });
+        }
     }
 
     render() {

@@ -5,7 +5,7 @@ import Terms from './Terms';
 import Create from './Create';
 import Privacy from './Privacy';
 import Dashboard from './Dashboard';
-import AddKey from './AddKey';
+import NoWeb3 from './NoWeb3';
 import Wallet from './Wallet';
 import Recover from './Recover';
 import Confirmation from './Confirmation';
@@ -26,6 +26,7 @@ class App extends Component {
                     <div className="fl">
                         <div className="fl-100">
                             <Route exact path="/" component={Main}/>
+                            <Route exact path="/web3" component={NoWeb3}/>
                             <Route exact path="/terms" component={Terms}/>
                             <Route exact path="/create" component={Create}/>
                             <Route exact path="/privacy" component={Privacy}/>
