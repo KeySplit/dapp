@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashPass } from '../Actions';
 
-class Create extends Component {
+class Recover extends Component {
 
     constructor(props) {
         super(props);
@@ -28,10 +28,9 @@ class Create extends Component {
 
     render() {
         return (
-            <div className="create">
+            <div className="recover">
                 <h1>Create Account</h1>
-                <p>Your wallet address is your username.</p>
-                <p>Your address: <span className="account">{ this.props.account }</span></p>
+                <p>Your ETH wallet address<br/>is your username.</p>
                 <div className="fl-row">
                     <div className="fl-offset-10 fl-80">
                         <h4>Create Password</h4>
@@ -56,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Create);
+export default connect(mapStateToProps, mapDispatchToProps)(Recover);
