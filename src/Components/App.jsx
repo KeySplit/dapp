@@ -7,6 +7,7 @@ import Privacy from './Privacy';
 import Dashboard from './Dashboard';
 import AddKey from './AddKey';
 import Wallet from './Wallet';
+import Recover from './Recover';
 import Confirmation from './Confirmation';
 
 import StepsContainer from '../Containers/StepsContainer';
@@ -29,6 +30,7 @@ class App extends Component {
                             <Route exact path="/create" component={Create}/>
                             <Route exact path="/privacy" component={Privacy}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
+                            <Route exact path="/recover" component={Recover}/>
                             <Route path="/add-key" component={StepsContainer}/>
                             <Route path="/wallet/:name" component={Wallet}/>
                             <Route path="/confirm" component={Confirmation}/>

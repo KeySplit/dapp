@@ -115,7 +115,7 @@ class Step2 extends Component {
                         <h4>Guardian 1</h4>
                         <input onChange={ this.handleInputChange.bind(this, 1, "name") } placeholder="Guardian 1's name" type="text" name="g1_name" />
                         <input onChange={ this.handleInputChange.bind(this, 1, "phone") } placeholder="Guardian 1's phone number" type="text" name="g1_phone" />
-                        <input onChange={ this.handleInputChange .bind(this, 1, "community")} placeholder="Community" type="text" name="g1_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 1, "community")} placeholder="Community" type="text" name="g1_community" />
                     </div>
                 </div>
                 <div className="fl-row">
