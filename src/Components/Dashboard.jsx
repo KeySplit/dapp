@@ -37,7 +37,6 @@ class Dashboard extends Component {
             console.log("No keys detected")
         }
 
-
         if(localStorage.getItem(`${localStorage.account}:heldShards`)){
             this.setState({
                 keyShards: JSON.parse(localStorage.getItem(`${localStorage.account}:heldShards`))
@@ -107,16 +106,6 @@ class NoKeysPanel extends Component {
         super(props);
     }
 
-    componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
-                }
-            }
-        });
-    }
-
     render() {
         return (
             <div>
@@ -141,16 +130,6 @@ class KeysPanel extends Component {
         super(props);
     }
 
-    componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
-                }
-            }
-        });
-    }
-
     render() {
         return (
             <div>
@@ -171,5 +150,3 @@ class KeysPanel extends Component {
         )
     }
 }
-
-// <center><button onClick={() => { this.props.history.push('/add-key') }} className="create-account">ADD KEY</button></center>

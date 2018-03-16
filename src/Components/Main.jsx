@@ -6,7 +6,7 @@ class Main extends Component {
         return (
             <div className="landing">
                 <h1>KeySplit</h1>
-                <p>Simple & Secure way to <br/>store your seed words</p>
+                <p>A simple, secure way to recover your secret keys and passwords</p>
                 <p className="learn-more">Learn More</p>
                 <button onClick={(e) => {
                     this.props.history.push('terms')
