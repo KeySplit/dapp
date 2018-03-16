@@ -28,7 +28,7 @@ class Create extends Component {
         this.setState({ password: e.target.value });
     }
 
-    createPass = () =>{
+    createPass = () => {
         if(this.state.password) {
             if(this.state.password.length < 12){
                 this.setState({errors: "Oops! Your password must be a minimum of 12 characters."});
