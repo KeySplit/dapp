@@ -33,7 +33,6 @@ class StepsContainer extends Component {
             let shards = [];
             let urls = [];
             localStorage.setItem(`${localStorage.account}:shards`, "[]");
-
             return this.state.ks.mnemonicToSSS(this.state.mnemonic, 5, 3, this.state.password)
             .then((mnemonicShards) => {
                 for(var shard of mnemonicShards){

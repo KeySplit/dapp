@@ -20,7 +20,9 @@ class Dashboard extends Component {
         if (window.web3 !== undefined) {
             this.props.ETHaccount().then( (response) => {
                 if(response.account) {
-                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                    if(!(localStorage.getItem(`${response.account}:password`)) && (this.props.location.pathname === "/dashboard")){
+                        this.props.history.push('/');
+                    } else if(response.account === 'undefined' || typeof response.account === undefined){
                         this.props.history.push('/web3');
                     }
                 }
