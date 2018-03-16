@@ -75,7 +75,7 @@ class Wallet extends Component {
                     </div>
                 )}
 
-                <center><button onClick={() => { this.props.history.push('/dashboard') }} className="create-account">ASK FOR KEY</button></center>
+                <center><button onClick={() => { this.props.history.push('/recover') }} className="recover-key">ASK FOR KEY</button></center>
             </div>
         )
     }

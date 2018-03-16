@@ -27,7 +27,7 @@ class Terms extends Component {
             <div className="terms">
                 <h1>Privacy Polixy &<br/>Terms of Use</h1>
                 <Link to="privacy">Privacy Policy</Link><br/>
-                <Link to="terms">Terms of Use (missing link)</Link><br/>
+                <Link to="terms">Terms of Use</Link><br/>
                 <p>By clicking “Accept”, you confirm that you have read, accepted, and agreed to our privacy policy and terms of use.</p>
                 <center><button onClick={() => { this.props.history.push('/create') }} className="create-account">ACCEPT</button></center>
             </div>

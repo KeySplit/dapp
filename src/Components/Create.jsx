@@ -38,7 +38,8 @@ class Create extends Component {
             else{
                 this.props.hashPass(this.state.password)
                 .then((result) => {
-                    localStorage.setItem(`${this.props.account}:password`, JSON.stringify(result.hash));
+                    localStorage.setItem('account', this.props.account);
+                    localStorage.setItem(`${this.props.account}:password`, result.hash.hash);
                     this.setState({ errors: "" });
                     this.props.history.push('/dashboard')
                 });
