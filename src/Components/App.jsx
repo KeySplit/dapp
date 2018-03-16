@@ -9,7 +9,6 @@ import NoWeb3 from './NoWeb3';
 import Wallet from './Wallet';
 import Recover from './Recover';
 import Confirmation from './Confirmation';
-
 import StepsContainer from '../Containers/StepsContainer';
 
 import {

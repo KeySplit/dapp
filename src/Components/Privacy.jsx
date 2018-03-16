@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
 class Privacy extends Component {
+
+    componentWillMount = () => {
+        if (typeof window.web3 === 'undefined' || typeof window.web3 === undefined){
+            this.props.history.push('/web3');
+        }
+    }
+    
     render() {
         return (
             <div className="privacy">

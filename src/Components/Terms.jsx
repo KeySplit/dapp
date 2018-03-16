@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { getETHaccount } from '../Actions';
+import { bindActionCreators } from 'redux';
 
 class Terms extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props)
+    }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
     }
 
     render() {
@@ -21,4 +33,16 @@ class Terms extends Component {
     }
 }
 
-export default Terms;
+const mapStateToProps = (state) => {
+    return {
+        account: state.web3Reducer.account
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Terms);

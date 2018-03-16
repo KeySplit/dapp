@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getETHaccount } from '../Actions';
 
 class AddKey extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
     }
 
     render() {
@@ -20,7 +33,19 @@ class AddKey extends Component {
     }
 }
 
-export default AddKey;
+const mapStateToProps = (state) => {
+    return {
+        account: state.web3Reducer.account
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddKey);
 
 class Step1 extends Component {
 
@@ -29,11 +54,26 @@ class Step1 extends Component {
         this.state = {};
     }
 
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+
     handleInputChange = (e) => {
         this.setState({ nickname: e.target.value });
     }
+
     handleAreaChange = (e) => {
         this.setState({ seed: e.target.value });
+    }
+
+    handleContinue = () => {
+        this.props.changeStep.bind(this, {nickname: this.state.nickname, seed: this.state.seed}, 1);
     }
 
     render() {
@@ -59,9 +99,7 @@ class Step1 extends Component {
                 </div>
                 <center>
                     <button
-                    onClick={
-                        this.props.changeStep.bind(this, {nickname: this.state.nickname, seed: this.state.seed}, 1)
-                    }>
+                    onClick={ this.props.changeStep.bind(this, {nickname: this.state.nickname, seed: this.state.seed}, 1) }>
                     CONTINUE
                     </button>
                 </center>
@@ -86,6 +124,16 @@ class Step2 extends Component {
         };
     }
 
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+
     handleInputChange = (id, key, e) => {
         let newArr = [...this.state.guardians];
         newArr[id-1][key] = e.target.value;
@@ -94,7 +142,6 @@ class Step2 extends Component {
             guardians: newArr
         })
     }
-
 
     render() {
         return (
@@ -167,10 +214,19 @@ class Step3 extends Component {
         super(props);
     }
 
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+
     copyLink = (url) => {
         console.log(url);
     }
-
 
     render() {
         return (
@@ -213,6 +269,17 @@ class Step3 extends Component {
 }
 
 class Step4 extends Component {
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+    
     render() {
         return (
             <div className="step4">
