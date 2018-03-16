@@ -14,28 +14,30 @@ class Wallet extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
-                } else {
-                    if(localStorage.pkey){
-                        let keyInfo = JSON.parse(localStorage.pkey)
-                        let guardians = keyInfo.guardians;
-                        guardians.map(function(el, index) {
-                            var o = Object.assign({}, el);
-                            o.visible = false;
-                            o.id = index+1;
-                            return o;
-                        })
-                        this.setState({
-                            name: keyInfo.nickname,
-                            guardians: guardians
-                        })
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account){
+                    if(response.account === 'undefined' || typeof response.account === undefined){
+                        this.props.history.push('/web3');
+                    } else {
+                        if(localStorage.pkey){
+                            let keyInfo = JSON.parse(localStorage.pkey)
+                            let guardians = keyInfo.guardians;
+                            guardians.map(function(el, index) {
+                                var o = Object.assign({}, el);
+                                o.visible = false;
+                                o.id = index+1;
+                                return o;
+                            })
+                            this.setState({
+                                name: keyInfo.nickname,
+                                guardians: guardians
+                            })
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     toggleProtector = (index) => {
