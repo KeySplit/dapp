@@ -13,15 +13,17 @@ class Create extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/create"){
-                    this.props.history.push('/dashboard');
-                } else if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account){
+                    if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/create"){
+                        this.props.history.push('/dashboard');
+                    } else if(response.account === 'undefined' || typeof response.account === undefined){
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     handleChange = (e) => {

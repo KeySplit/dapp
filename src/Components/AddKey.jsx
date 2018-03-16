@@ -12,13 +12,15 @@ class AddKey extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account) {
+                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     render() {
@@ -55,13 +57,15 @@ class Step1 extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account) {
+                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     handleInputChange = (e) => {
@@ -88,7 +92,7 @@ class Step1 extends Component {
                     </div>
                 </div>
                 <h1>Add Seed Words</h1>
-                <p>KeySplit helps you to store your seed words safely by creating five keys you share with your trusty guardians.  Let’s start!</p>
+                <p>KeySplit helps you recover your seed words safely by creating five keys you share with your trusty guardians.  Let’s start!</p>
 
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
@@ -125,13 +129,15 @@ class Step2 extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account) {
+                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     handleInputChange = (id, key, e) => {
@@ -215,13 +221,15 @@ class Step3 extends Component {
     }
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account) {
+                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     copyLink = (url) => {
@@ -271,15 +279,17 @@ class Step3 extends Component {
 class Step4 extends Component {
 
     componentWillMount = () => {
-        this.props.ETHaccount().then( (response) => {
-            if(response.account){
-                if(response.account === undefined || response.account === 'undefined'){
-                    this.props.history.push('/web3');
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account) {
+                    if(response.account === 'undefined' || typeof response.account === undefined) {
+                        this.props.history.push('/web3');
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-    
+
     render() {
         return (
             <div className="step4">

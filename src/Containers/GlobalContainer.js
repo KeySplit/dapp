@@ -17,7 +17,7 @@ class GlobalContainer extends Component {
                 if(response.account){
                     if((localStorage.getItem(`${response.account}:password`)) && ((this.props.location.pathname === "/create") || (this.props.location.pathname === "/dashboard"))){
                         this.props.history.push('/dashboard');
-                    } else if(response.account === undefined || response.account === 'undefined'){
+                    } else if(response.account === 'undefined'){
                         this.props.history.push('/web3');
                     } else {
                         this.props.history.push('/');

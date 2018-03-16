@@ -30,21 +30,23 @@ export const successHashPass = (hashed) => {
 
 
 export const getETHaccount = () => {
-    let web3 = new Web3(window.web3.currentProvider);
-    return (dispatch) => {
-        return new Promise((resolve, reject) => {
-            web3.eth.getAccounts((err, accounts) => {
-                if(err) {
-                    reject(dispatch(failETHaccount(err)))
-                } else {
-                    if (accounts[0] === undefined) {
-                        resolve(dispatch(successETHaccount('undefined')))
+    if (window.web3 !== undefined) {
+        let web3 = new Web3(window.web3.currentProvider);
+        return (dispatch) => {
+            return new Promise((resolve, reject) => {
+                web3.eth.getAccounts((err, accounts) => {
+                    if(err) {
+                        reject(dispatch(failETHaccount(err)))
                     } else {
-                        resolve(dispatch(successETHaccount(accounts[0])))
+                        if (accounts[0] === undefined) {
+                            resolve(dispatch(successETHaccount('undefined')))
+                        } else {
+                            resolve(dispatch(successETHaccount(accounts[0])))
+                        }
                     }
-                }
+                })
             })
-        })
+        }
     }
 }
 
