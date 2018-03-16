@@ -2,13 +2,26 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashPass } from '../Actions';
+import { getETHaccount } from '../Actions';
 
 class Create extends Component {
 
-    state = { errors: [] }
+    state = { errors: [] };
 
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/create"){
+                    this.props.history.push('/dashboard');
+                } else if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
     }
 
     handleChange = (e) => {
@@ -16,16 +29,18 @@ class Create extends Component {
     }
 
     createPass = () =>{
-        if(this.state.password.length < 12){
-            this.setState({errors: "Oops! Your password must be a minimum of 12 characters."});
-        }
-        else{
-            this.props.hashPass(this.state.password)
-            .then((result) => {
-                localStorage.setItem(`${this.props.account}:password`, JSON.stringify(result.hash));
-                this.setState({ errors: "" });
-                this.props.history.push('/dashboard')
-            });
+        if(this.state.password) {
+            if(this.state.password.length < 12){
+                this.setState({errors: "Oops! Your password must be a minimum of 12 characters."});
+            }
+            else{
+                this.props.hashPass(this.state.password)
+                .then((result) => {
+                    localStorage.setItem(`${this.props.account}:password`, JSON.stringify(result.hash));
+                    this.setState({ errors: "" });
+                    this.props.history.push('/dashboard')
+                });
+            }
         }
     }
 
@@ -56,7 +71,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        hashPass: bindActionCreators(hashPass, dispatch)
+        hashPass: bindActionCreators(hashPass, dispatch),
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
     }
 }
 

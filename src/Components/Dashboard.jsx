@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getETHaccount } from '../Actions';
 
 class Dashboard extends Component {
 
@@ -11,6 +14,16 @@ class Dashboard extends Component {
             keyInfo: null,
             keyShards: []
         }
+    }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
     }
 
     componentDidMount = () => {
@@ -73,13 +86,37 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+    return {
+        account: state.web3Reducer.account
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 class NoKeysPanel extends Component {
+
     constructor(props) {
         super(props);
     }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <div>
@@ -99,9 +136,21 @@ class NoKeysPanel extends Component {
 }
 
 class KeysPanel extends Component {
+
     constructor(props) {
         super(props);
     }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
+    }
+
     render() {
         return (
             <div>

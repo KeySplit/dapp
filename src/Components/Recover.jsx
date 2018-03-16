@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashPass } from '../Actions';
+import { getETHaccount } from '../Actions';
 
 class Recover extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount = () => {
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                }
+            }
+        });
     }
 
     handleChange = (e) => {
@@ -51,7 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        hashPass: bindActionCreators(hashPass, dispatch)
+        hashPass: bindActionCreators(hashPass, dispatch),
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
     }
 }
 

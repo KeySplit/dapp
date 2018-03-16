@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getETHaccount } from '../Actions';
 
 class Wallet extends Component {
 
@@ -11,20 +14,28 @@ class Wallet extends Component {
     }
 
     componentWillMount = () => {
-        if(localStorage.pkey){
-            let keyInfo = JSON.parse(localStorage.pkey)
-            let guardians = keyInfo.guardians;
-            guardians.map(function(el, index) {
-                var o = Object.assign({}, el);
-                o.visible = false;
-                o.id = index+1;
-                return o;
-            })
-            this.setState({
-                name: keyInfo.nickname,
-                guardians: guardians
-            })
-        }
+        this.props.ETHaccount().then( (response) => {
+            if(response.account){
+                if(response.account === undefined || response.account === 'undefined'){
+                    this.props.history.push('/web3');
+                } else {
+                    if(localStorage.pkey){
+                        let keyInfo = JSON.parse(localStorage.pkey)
+                        let guardians = keyInfo.guardians;
+                        guardians.map(function(el, index) {
+                            var o = Object.assign({}, el);
+                            o.visible = false;
+                            o.id = index+1;
+                            return o;
+                        })
+                        this.setState({
+                            name: keyInfo.nickname,
+                            guardians: guardians
+                        })
+                    }
+                }
+            }
+        });
     }
 
     toggleProtector = (index) => {
@@ -32,8 +43,6 @@ class Wallet extends Component {
         newProtectors[index].visible = !newProtectors[index].visible;
         this.setState({guardians: newProtectors})
     }
-
-
 
     render() {
         return (
@@ -70,6 +79,16 @@ class Wallet extends Component {
     }
 }
 
-export default Wallet;
+const mapStateToProps = (state) => {
+    return {
+        account: state.web3Reducer.account
+    };
+}
 
-// <p className="collapsed-message">Nick has not checked in for over 2 months. We recommend connecting with your guardian so they can check in at least once a week. <Link to="">Learn More</Link></p>
+const mapDispatchToProps = (dispatch) => {
+    return {
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
