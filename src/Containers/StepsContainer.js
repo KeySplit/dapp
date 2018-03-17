@@ -8,7 +8,7 @@ import KeySplit from '../Keysplit/KeySplit';
 // const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
 
 class StepsContainer extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -54,7 +54,6 @@ class StepsContainer extends Component {
                     pkeys.push(keyId);
                 }
                 localStorage.setItem(`${localStorage.account}:pkeys`, JSON.stringify(pkeys));
-
                 this.props.step2(data.guardians);
                 this.props.history.push('/add-key/step3');
                 return urls;

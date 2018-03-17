@@ -143,7 +143,6 @@ class Step2 extends Component {
     handleInputChange = (id, key, e) => {
         let newArr = [...this.state.guardians];
         newArr[id-1][key] = e.target.value;
-
         this.setState({
             guardians: newArr
         })
@@ -207,7 +206,8 @@ class Step2 extends Component {
                     onClick={
                         this.props.changeStep.bind(this, this.state, 2)
                     }>
-                    CONTINUE</button></center>
+                    CONTINUE</button>
+                </center>
 
             </div>
         )

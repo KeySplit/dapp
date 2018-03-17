@@ -2,32 +2,33 @@ import * as actionType from './ActionType';
 import Web3 from "web3";
 import crypto from 'crypto';
 
-
 export const failETHaccount = (error) => {
     return {
         type: actionType.FETCH_ACCOUNT_FAIL,
         error: error
     }
 };
+
 export const successETHaccount = (account) => {
     return {
         type: actionType.FETCH_ACCOUNT_SUCCESS,
         account: account
     }
 };
+
 export const failHashPass = (error) => {
     return {
         type: actionType.HASH_PASS_FAIL,
         error: error
     }
 };
+
 export const successHashPass = (hashed) => {
     return {
         type: actionType.HASH_PASS_SUCCESS,
         hash: hashed
     }
 };
-
 
 export const getETHaccount = () => {
     if (window.web3 !== undefined) {
@@ -67,29 +68,27 @@ export const hashPass = (password) => {
     }
 };
 
-
-
-
-
-
 export const setStep1 = (data) => {
     return {
         type: actionType.SET_STEP_1,
         address: data
     }
 };
+
 export const setStep2 = (data) => {
     return {
         type: actionType.SET_STEP_2,
         guardians: data
     }
 };
+
 export const setStep3 = (data) => {
     return {
         type: actionType.SET_STEP_1,
         address: data
     }
 };
+
 export const setStep4 = (data) => {
     return {
         type: actionType.SET_STEP_1,

@@ -14,9 +14,11 @@ function repeat(char, number) {
 }
 
 class ApiEndpoint {
+  
   constructor(apiServer) {
     this.apiServer = apiServer
   }
+
   upload(body) {
     return rp({
       method: 'POST',
@@ -25,6 +27,7 @@ class ApiEndpoint {
       json: true
     });
   }
+
   download(shardid) {
     return rp({
       method: 'GET',
@@ -37,6 +40,7 @@ class ApiEndpoint {
 var passwordStore = {};
 
 class KeySplit {
+
   constructor(options={}) {
     if(typeof window === "undefined") {
       var window = {};
@@ -46,6 +50,7 @@ class KeySplit {
     this.account = options.account;
     passwordStore[this] = options.password;
   }
+
   mnemonicToSSS(mnemonic, shareCount, threshold, password) {
     password = password || passwordStore[this];
     var key = bip39.mnemonicToEntropy(mnemonic);
@@ -66,6 +71,7 @@ class KeySplit {
       });
     });
   }
+
   combineSSS(mnemonicShares, password) {
     password = password || passwordStore[this];
     var shares = [];
@@ -86,6 +92,7 @@ class KeySplit {
       });
     })
   }
+
   uploadShard(shard, uploader) {
     uploader = uploader || new ApiEndpoint(this.apiUrl);
     var hash = crypto.createHash('sha256');
@@ -110,6 +117,7 @@ class KeySplit {
       return result
     });
   }
+
   downloadShard(pathAndKey, downloader) {
     downloader = downloader || new ApiEndpoint(this.apiUrl);
     var objectid, key;
@@ -124,6 +132,7 @@ class KeySplit {
       return entropyToMnemonic(shardHex);
     })
   }
+
   saveShard(shard, password) {
     return new Promise((resolve, reject) => {
       password = password || passwordStore[this];
@@ -151,6 +160,7 @@ class KeySplit {
       });
     });
   }
+
   getShard(shardId, password) {
     return new Promise((resolve, reject) => {
       var splitVal = this.localStorage.getItem(`encShard:${shardId}`);

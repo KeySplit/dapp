@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getETHaccount } from '../Actions';
 
 class Dashboard extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -46,7 +46,6 @@ class Dashboard extends Component {
                 keyShards: JSON.parse(localStorage.getItem(`${localStorage.account}:heldShards`))
             },() => { console.log(this.state.keyShards); })
         }
-
     }
 
     render() {
