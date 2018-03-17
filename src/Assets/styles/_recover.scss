@@ -1,9 +1,19 @@
 .recover {
     margin: 20px;
 
+    .errors{
+        color: $errorred;
+        font-size: 12px;
+    }
+
     h1{
-        margin-top: 60px;
+        margin-top: 20px;
         font-size: 28px;
+    }
+
+    p{
+        color: $darkblue;
+        font-family: 'Roboto-Light';
     }
 
     h4{
@@ -12,6 +22,7 @@
         margin-bottom: 5px;
         font-size: 14px;
     }
+
     input{
         width: 100%;
         height: 40px;
@@ -20,6 +31,6 @@
         padding: 0 5px;
         font-size: 17px;
         font-family: 'Roboto-Light';
-        margin-bottom: 80px;
+        margin-bottom: 10px;
     }
 }

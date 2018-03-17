@@ -27,6 +27,7 @@ class Create extends Component {
     }
 
     handleChange = (e) => {
+        e.preventDefault();
         this.setState({ password: e.target.value });
     }
 
