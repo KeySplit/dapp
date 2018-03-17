@@ -5,10 +5,10 @@ import AddKey from '../Components/AddKey';
 import * as actions from '../Actions';
 import KeySplit from '../Keysplit/KeySplit';
 
-
 // const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
 
 class StepsContainer extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -21,8 +21,6 @@ class StepsContainer extends Component {
     }
 
     changeStep = (data, step) =>{
-        console.log(data)
-
         if(step === 1){
             this.props.step1(data);
             this.setState({mnemonic: data.seed, key: data.nickname});
@@ -47,7 +45,16 @@ class StepsContainer extends Component {
                     data.guardians[x].url = url;
                 }
 
-                localStorage.pkey = JSON.stringify({nickname: this.state.key, guardians: data.guardians})
+                let keyId = JSON.stringify({nickname: this.state.key, guardians: data.guardians});
+                var pkeys = JSON.parse(localStorage.getItem(`${localStorage.account}:pkeys`));
+                if(!pkeys) {
+                    pkeys = [];
+                }
+                if(pkeys.indexOf(keyId) < 0) {
+                    pkeys.push(keyId);
+                }
+                localStorage.setItem(`${localStorage.account}:pkeys`, JSON.stringify(pkeys));
+
                 this.props.step2(data.guardians);
                 this.props.history.push('/add-key/step3');
                 return urls;
@@ -60,9 +67,7 @@ class StepsContainer extends Component {
             <AddKey {...this.props} changeStep={this.changeStep} />
         )
     }
-
 }
-
 
 const mapStateToProps = (state) => {
     return {
@@ -76,7 +81,5 @@ const mapDispatchToProps = (dispatch) => {
         step2: bindActionCreators(actions.setStep2, dispatch),
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepsContainer);

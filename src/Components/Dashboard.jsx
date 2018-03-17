@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { getETHaccount } from '../Actions';
 
 class Dashboard extends Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
             keys: false,
-            keyInfo: null,
+            keyInfo: [],
             keyShards: []
         }
     }
@@ -31,10 +31,10 @@ class Dashboard extends Component {
     }
 
     componentDidMount = () => {
-        if(localStorage.pkey){
+        if(localStorage.getItem(`${localStorage.account}:pkeys`)){
             this.setState({
                 keys: true,
-                keyInfo: JSON.parse(localStorage.pkey)
+                keyInfo: JSON.parse(localStorage.getItem(`${localStorage.account}:pkeys`))
             });
         }
         else{
@@ -135,22 +135,31 @@ class KeysPanel extends Component {
     }
 
     render() {
+        const keyData = this.props.keys;
         return (
             <div>
-                <Link to={`/wallet/${this.props.keys.nickname}`} className="fl-row">
-                    <div className="fl-100">
-                        <div className="fl-row key-row">
-                            <div className="fl-90">
-                                <span>{this.props.keys.nickname}</span>
-                                <span className="status-ball active"></span>
-                            </div>
-                            <div className="fl-10">
-                                <img alt="" src={require("../Assets/images/dashboard/next.svg")} />
-                            </div>
+                {keyData.map(function(k, index){
+                    let key = JSON.parse(k);
+                    return (
+                        <div key={index}>
+                            <Link to={`/wallet/${key.nickname}`} data={key.nickname} className="fl-row">
+                                <div className="fl-100">
+                                    <div className="fl-row key-row">
+                                        <div className="fl-90">
+                                            <span>{key.nickname}</span>
+                                            <span className="status-ball active"></span>
+                                        </div>
+                                        <div className="fl-10">
+                                            <img alt="" src={require("../Assets/images/dashboard/next.svg")} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
-                    </div>
-                </Link>
+                    )
+                })}
+                <center><button onClick={() => { this.props.history.push('/add-key/step1') }} className="create-account">ADD KEY</button></center>
             </div>
-        )
+        );
     }
 }

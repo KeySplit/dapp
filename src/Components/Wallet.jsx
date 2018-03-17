@@ -20,19 +20,23 @@ class Wallet extends Component {
                     if(response.account === 'undefined' || typeof response.account === undefined){
                         this.props.history.push('/web3');
                     } else {
-                        if(localStorage.pkey){
-                            let keyInfo = JSON.parse(localStorage.pkey)
-                            let guardians = keyInfo.guardians;
-                            guardians.map(function(el, index) {
-                                var o = Object.assign({}, el);
-                                o.visible = false;
-                                o.id = index+1;
-                                return o;
-                            })
-                            this.setState({
-                                name: keyInfo.nickname,
-                                guardians: guardians
-                            })
+                        if(localStorage.getItem(`${localStorage.account}:pkeys`)){
+                            let keyInfo = JSON.parse(localStorage.getItem(`${localStorage.account}:pkeys`));
+                            for (var k in keyInfo) {
+                                if (JSON.parse(keyInfo[k]).nickname === this.props.match.params.name) {
+                                    let guardians = JSON.parse(keyInfo[k]).guardians;
+                                    guardians.map(function(el, index) {
+                                        var o = Object.assign({}, el);
+                                        o.visible = false;
+                                        o.id = index+1;
+                                        return o;
+                                    })
+                                    this.setState({
+                                        name: this.props.match.params.name,
+                                        guardians: guardians
+                                    })
+                                }
+                            }
                         }
                     }
                 }
@@ -74,8 +78,7 @@ class Wallet extends Component {
                         </div>
                     </div>
                 )}
-
-                <center><button onClick={() => { this.props.history.push('/recover') }} className="recover-key">ASK FOR KEY</button></center>
+                <center><button onClick={() => { this.props.history.push('/recover') }} className="recover-key">RECOVER KEY</button></center>
             </div>
         )
     }
