@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashPass } from '../Actions';
