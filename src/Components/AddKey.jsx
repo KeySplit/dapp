@@ -249,8 +249,7 @@ class Step3 extends Component {
                 </div>
                 <h1>Share Keys</h1>
                 <p>Send the unique keys to your guardians. KeySplit recommends contacting the guardians personally after to make sure they got it.</p>
-
-                { this.props.data.guardians.map( (guardian, index) =>
+                {this.props.data.guardians.map( (guardian, index) =>
                     <div className="fl-row" key={index}>
                         <div className="fl-offset-5 fl-90">
                             <div className="share-tile">
@@ -269,7 +268,6 @@ class Step3 extends Component {
                         </div>
                     </div>
                 )}
-
                 <center><button onClick={() => { this.props.history.push('/add-key/done') }}>DONE</button></center>
             </div>
         )
