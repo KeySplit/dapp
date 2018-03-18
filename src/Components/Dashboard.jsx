@@ -82,7 +82,6 @@ class Dashboard extends Component {
                         )}
                     </TabPanel>
                 </Tabs>
-
             </div>
         )
     }

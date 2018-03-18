@@ -14,7 +14,7 @@ function repeat(char, number) {
 }
 
 class ApiEndpoint {
-  
+
   constructor(apiServer) {
     this.apiServer = apiServer
   }
@@ -88,6 +88,7 @@ class KeySplit {
         var d = crypto.createDecipher("aes128", pbkdf2Pass);
         var rawKey = d.update(encKey, "hex", "hex");
         rawKey += d.final("hex");
+        resolve(bip39.entropyToMnemonic(rawKey));
         return bip39.entropyToMnemonic(rawKey);
       });
     })

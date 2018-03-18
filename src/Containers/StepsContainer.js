@@ -25,9 +25,7 @@ class StepsContainer extends Component {
             this.props.step1(data);
             this.setState({mnemonic: data.seed, key: data.nickname});
             this.props.history.push('/add-key/step2');
-        }
-
-        else if(step === 2){
+        } else if(step === 2){
             let shards = [];
             let urls = [];
             localStorage.setItem(`${localStorage.account}:shards`, "[]");

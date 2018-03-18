@@ -50,8 +50,8 @@ class Confirmation extends Component {
                 if(!shardList) {
                     shardList = [];
                 }
-                if(shardList.indexOf(shardId) < 0) {
-                    shardList.push(shardId);
+                if(shardList.indexOf(shardHex) < 0) {
+                    shardList.push(shardHex);
                 }
                 localStorage.setItem(`${localStorage.account}:heldShards`, JSON.stringify(shardList));
                 this.setState({
