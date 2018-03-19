@@ -8,10 +8,6 @@ class Create extends Component {
 
     state = { errors: [] };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount = () => {
         if (window.web3 !== undefined) {
             this.props.ETHaccount().then( (response) => {

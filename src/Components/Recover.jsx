@@ -16,10 +16,6 @@ class Recover extends Component {
         ks: new KeySplit({account: localStorage.account, password: localStorage.getItem(`${localStorage.account}:password`), localStorage: localStorage})
     };
 
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount = () => {
         if (window.web3 !== undefined) {
             this.props.ETHaccount().then( (response) => {
@@ -107,11 +103,6 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Recover);
 
 class RecoveredPanel extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>

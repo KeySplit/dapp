@@ -6,10 +6,6 @@ import { bindActionCreators } from 'redux';
 
 class Terms extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount = () => {
         if (window.web3 !== undefined) {
             this.props.ETHaccount().then( (response) => {

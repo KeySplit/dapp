@@ -8,19 +8,14 @@ const web3Reducer = (state = {}, action) => {
             } else {
                 return null;
             }
-            break
         case actionType.HASH_PASS_SUCCESS:
             return {...state, hash: action.hash};
-            break   
         case actionType.SET_STEP_1:
             return {...state, address: action.address};
-            break
         case actionType.SET_STEP_2:
             return {...state, guardians: action.guardians};
-            break
         default:
             return state
-            break
     }
 }
 

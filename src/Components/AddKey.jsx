@@ -7,10 +7,6 @@ import { getETHaccount } from '../Actions';
 
 class AddKey extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount = () => {
         if (window.web3 !== undefined) {
             this.props.ETHaccount().then( (response) => {
@@ -215,10 +211,6 @@ class Step2 extends Component {
 }
 
 class Step3 extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     componentWillMount = () => {
         if (window.web3 !== undefined) {

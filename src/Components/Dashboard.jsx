@@ -44,7 +44,7 @@ class Dashboard extends Component {
         if(localStorage.getItem(`${localStorage.account}:heldShards`)){
             this.setState({
                 keyShards: JSON.parse(localStorage.getItem(`${localStorage.account}:heldShards`))
-            },() => { console.log(this.state.keyShards); })
+            });
         }
     }
 
@@ -103,11 +103,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 
 
 class NoKeysPanel extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -127,11 +122,6 @@ class NoKeysPanel extends Component {
 }
 
 class KeysPanel extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const keyData = this.props.keys;
         return (
