@@ -142,8 +142,8 @@ class KeySplit {
         if(!shardList) {
           shardList = [];
         }
-        if(shardList.indexOf(shardId) < 0) {
-          shardList.push(shardId);
+        if(shardList.indexOf(shardHex) < 0) {
+          shardList.push(shardHex);
         }
         this.localStorage.setItem(`${this.account}:heldShards`, JSON.stringify(shardList));
         resolve(shardId);
