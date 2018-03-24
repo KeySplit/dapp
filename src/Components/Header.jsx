@@ -5,7 +5,7 @@ class Header extends Component {
         return (
             <div className="header">
                 <div className="logo">
-                    <a href="/">
+                    <a href="/dashboard">
                     <img alt="" src={require("../Assets/images/header/logo.png")} />
                     <span>KeySplit</span>
                     </a>

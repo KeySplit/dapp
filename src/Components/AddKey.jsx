@@ -156,7 +156,7 @@ class Step2 extends Component {
                     </div>
                 </div>
                 <h1>Add Guardians</h1>
-                <p>Appoint your five guardians who will protect and help you restore your seed words. Each guardian needs to be from different community.</p>
+                <p>We strongly recommend that each guardian be from a different community in your life, so that they don't know each other and can't collude to recreate your private key.</p>
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 1</h4>
@@ -301,7 +301,7 @@ class Step4 extends Component {
                         <img alt="" className="low-opacity" src={require("../Assets/images/dashboard/happy_logo.png")} />
                     </div>
                 </div>
-                <p>You will get notified once your guardians check in. We recommend you connecting with your guardians regularly to make sure that they have your keys safe.</p>
+                <p>Your guardians now have your key shards stored, and you can recover your key by requesting them to send their key shards back to you.</p>
                 <center><button onClick={() => { this.props.history.push('/dashboard') }}>VIEW MY KEY</button></center>
             </div>
         )

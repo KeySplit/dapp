@@ -21,7 +21,7 @@ class Terms extends Component {
     render() {
         return (
             <div className="terms">
-                <h1>Privacy Polixy &<br/>Terms of Use</h1>
+                <h1>Privacy Policy &<br/>Terms of Use</h1>
                 <Link to="privacy">Privacy Policy</Link><br/>
                 <Link to="terms">Terms of Use</Link><br/>
                 <p>By clicking “Accept”, you confirm that you have read, accepted, and agreed to our privacy policy and terms of use.</p>
