@@ -161,40 +161,40 @@ class Step2 extends Component {
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 1</h4>
                         <input onChange={ this.handleInputChange.bind(this, 1, "name") } placeholder="Guardian 1's name" type="text" name="g1_name" />
-                        <input onChange={ this.handleInputChange.bind(this, 1, "phone") } placeholder="Guardian 1's phone number" type="text" name="g1_phone" />
-                        <input onChange={ this.handleInputChange.bind(this, 1, "community")} placeholder="Community" type="text" name="g1_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 1, "phone") } placeholder="Phone number (optional)" type="text" name="g1_phone" />
+                        <input onChange={ this.handleInputChange.bind(this, 1, "community")} placeholder="Community (e.g. school, work, etc.)" type="text" name="g1_community" />
                     </div>
                 </div>
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 2</h4>
                         <input onChange={ this.handleInputChange.bind(this, 2, "name") } placeholder="Guardian 2's name" type="text" name="g2_name" />
-                        <input onChange={ this.handleInputChange.bind(this, 2, "phone") } placeholder="Guardian 2's phone number" type="text" name="g2_phone" />
-                        <input onChange={ this.handleInputChange.bind(this, 2, "community") } placeholder="Community" type="text" name="g2_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 2, "phone") } placeholder="Phone number (optional)" type="text" name="g2_phone" />
+                        <input onChange={ this.handleInputChange.bind(this, 2, "community") } placeholder="Community (e.g. school, work, etc.)" type="text" name="g2_community" />
                     </div>
                 </div>
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 3</h4>
                         <input onChange={ this.handleInputChange.bind(this, 3, "name") } placeholder="Guardian 3's name" type="text" name="g3_name" />
-                        <input onChange={ this.handleInputChange.bind(this, 3, "phone") } placeholder="Guardian 3's phone number" type="text" name="g3_phone" />
-                        <input onChange={ this.handleInputChange.bind(this, 3, "community") } placeholder="Community" type="text" name="g3_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 3, "phone") } placeholder="Phone number (optional)" type="text" name="g3_phone" />
+                        <input onChange={ this.handleInputChange.bind(this, 3, "community") } placeholder="Community (e.g. school, work, etc.)" type="text" name="g3_community" />
                     </div>
                 </div>
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 4</h4>
                         <input onChange={ this.handleInputChange.bind(this, 4, "name") } placeholder="Guardian 4's name" type="text" name="g4_name" />
-                        <input onChange={ this.handleInputChange.bind(this, 4, "phone") } placeholder="Guardian 4's phone number" type="text" name="g4_phone" />
-                        <input onChange={ this.handleInputChange.bind(this, 4, "community") } placeholder="Community" type="text" name="g4_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 4, "phone") } placeholder="Phone number (optional)" type="text" name="g4_phone" />
+                        <input onChange={ this.handleInputChange.bind(this, 4, "community") } placeholder="Community (e.g. school, work, etc.)" type="text" name="g4_community" />
                     </div>
                 </div>
                 <div className="fl-row">
                     <div className="fl-offset-5 fl-90">
                         <h4>Guardian 5</h4>
                         <input onChange={ this.handleInputChange.bind(this, 5, "name") } placeholder="Guardian 5's name" type="text" name="g5_name" />
-                        <input onChange={ this.handleInputChange.bind(this, 5, "phone") } placeholder="Guardian 5's phone number" type="text" name="g5_phone" />
-                        <input onChange={ this.handleInputChange.bind(this, 5, "community") } placeholder="Community" type="text" name="g5_community" />
+                        <input onChange={ this.handleInputChange.bind(this, 5, "phone") } placeholder="Phone number (optional)" type="text" name="g5_phone" />
+                        <input onChange={ this.handleInputChange.bind(this, 5, "community") } placeholder="Community (e.g. school, work, etc.)" type="text" name="g5_community" />
                     </div>
                 </div>
                 <center>
