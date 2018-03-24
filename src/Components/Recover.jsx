@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { hashPass } from '../Actions';
@@ -16,10 +15,6 @@ class Recover extends Component {
         password: localStorage.getItem(`${localStorage.account}:password`),
         ks: new KeySplit({account: localStorage.account, password: localStorage.getItem(`${localStorage.account}:password`), localStorage: localStorage})
     };
-
-    constructor(props) {
-        super(props);
-    }
 
     componentWillMount = () => {
         if (window.web3 !== undefined) {
@@ -108,11 +103,6 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(Recover);
 
 class RecoveredPanel extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>

@@ -59,7 +59,6 @@ class Confirmation extends Component {
                 })
                 resolve(shardId);
                 this.props.history.push('/dashboard')
-
             });
         });
     }

@@ -6,6 +6,22 @@
     position: relative;
     padding: 20px;
 
+    .back{
+        i {
+            border: solid $teal;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 6px;
+            margin-right: 3px;
+            margin-bottom: 3px;
+        }
+
+        .left {
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+    }
+
     .logo{
 
         grid-column-start: 1;

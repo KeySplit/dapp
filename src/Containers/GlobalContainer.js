@@ -5,9 +5,6 @@ import { bindActionCreators } from 'redux';
 import App from '../Components/App';
 
 class GlobalContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentWillMount = () => {
         if (typeof window.web3 === 'undefined' || typeof window.web3 === undefined){

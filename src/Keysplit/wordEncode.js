@@ -15,7 +15,6 @@ var INVALID_ENTROPY = 'Invalid entropy';
 var INVALID_MNEMONIC = 'Invalid mnemonic';
 var INVALID_CHECKSUM = 'Invalid mnemonic checksum';
 
-
 function bytesToBinary (bytes) {
   return bytes.map(function (x) {
     return lpad(x.toString(2), '0', 8)
@@ -31,17 +30,12 @@ function lpad (str, padString, length) {
   return str
 }
 
-
 function deriveChecksumBits (entropyBuffer) {
   var ENT = entropyBuffer.length * 8
   var CS = ENT / 32
   var hash = createHash('sha256').update(entropyBuffer).digest()
 
   return bytesToBinary([].slice.call(hash)).slice(0, CS)
-}
-
-function salt (password) {
-  return 'mnemonic' + (password || '')
 }
 
 export function entropyToMnemonic (entropy, wordlist) {

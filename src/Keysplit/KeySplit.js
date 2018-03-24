@@ -5,14 +5,6 @@ import {mnemonicToEntropy} from './wordEncode.js';
 import crypto from 'crypto';
 import rp from 'request-promise-native';
 
-function repeat(char, number) {
-  var string = "";
-  for(var i = 0; i < number; i++) {
-    string += char;
-  }
-  return string;
-}
-
 class ApiEndpoint {
 
   constructor(apiServer) {
@@ -42,11 +34,8 @@ var passwordStore = {};
 class KeySplit {
 
   constructor(options={}) {
-    if(typeof window === "undefined") {
-      var window = {};
-    }
     this.apiUrl = options.apiUrl || "https://cgr6zthug7.execute-api.us-east-2.amazonaws.com/keysplit";
-    this.localStorage = options.localStorage || window.localStorage;
+    this.localStorage = options.localStorage
     this.account = options.account;
     passwordStore[this] = options.password;
   }
@@ -153,8 +142,8 @@ class KeySplit {
         if(!shardList) {
           shardList = [];
         }
-        if(shardList.indexOf(shardId) < 0) {
-          shardList.push(shardId);
+        if(shardList.indexOf(shardHex) < 0) {
+          shardList.push(shardHex);
         }
         this.localStorage.setItem(`${this.account}:heldShards`, JSON.stringify(shardList));
         resolve(shardId);
