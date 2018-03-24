@@ -5,8 +5,6 @@ import AddKey from '../Components/AddKey';
 import * as actions from '../Actions';
 import KeySplit from '../Keysplit/KeySplit';
 
-// const mnemonic = "abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about";
-
 class StepsContainer extends Component {
 
     constructor(props) {
