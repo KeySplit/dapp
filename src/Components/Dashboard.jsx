@@ -60,7 +60,6 @@ class Dashboard extends Component {
         } else {
             shardsPanel = <ShardsPanel shards={this.state.keyShards} history={this.props.history} />
         }
-
         return (
             <div className="dashboard">
                 <Tabs>
