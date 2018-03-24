@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <div className="main-container">
-                <Header/>
+                <Route path ="*" component={Header}/>
                 <div className="main">
                     <div className="fl">
                         <div className="fl-100">
