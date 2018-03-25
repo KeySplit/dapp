@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getETHaccount } from '../Actions';
 
 class Main extends Component {
+
+    componentWillMount = () => {
+        if (window.web3 !== undefined) {
+            this.props.ETHaccount().then( (response) => {
+                if(response.account){
+                    if(localStorage.getItem(`${response.account}:password`) && this.props.location.pathname === "/") {
+                        this.props.history.push('/dashboard');
+                    } else if(response.account === 'undefined' || typeof response.account === undefined){
+                        this.props.history.push('/web3');
+                    }
+                }
+            });
+        }
+    }
     render() {
         return (
             <div className="landing">
@@ -16,4 +32,16 @@ class Main extends Component {
     }
 }
 
-export default withRouter(Main);
+const mapStateToProps = (state) => {
+    return {
+        account: state.web3Reducer.account
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        ETHaccount: bindActionCreators(getETHaccount, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main) 

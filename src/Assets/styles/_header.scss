@@ -6,13 +6,18 @@
     position: relative;
     padding: 20px;
 
+    p {
+        margin: 0;
+        display: inline-block;
+    }
+
     .back{
+
         i {
             border: solid $teal;
             border-width: 0 3px 3px 0;
             display: inline-block;
             padding: 6px;
-            margin-right: 3px;
             margin-bottom: 3px;
         }
 
@@ -25,7 +30,7 @@
     .logo{
 
         grid-column-start: 1;
-        grid-column-end: 10;
+        grid-column-end: 8;
 
         img{
             height: 25px;
