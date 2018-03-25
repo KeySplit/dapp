@@ -112,13 +112,10 @@ class KeySplit {
     downloader = downloader || new ApiEndpoint(this.apiUrl);
     var objectid, key;
     [objectid, key] = pathAndKey.split(":");
-    console.log(pathAndKey);
     return downloader.download(objectid).then((response) => {
-      console.log(objectid, key);
       var d = crypto.createDecipher("aes256", new Buffer(key, "base64"));
       var shardHex = d.update(response.data, "base64", "hex");
       shardHex += d.final("hex");
-      console.log(entropyToMnemonic(shardHex));
       return entropyToMnemonic(shardHex);
     })
   }

@@ -72,10 +72,6 @@ class Step1 extends Component {
         this.setState({ seed: e.target.value });
     }
 
-    // handleContinue = () => {
-    //     this.props.changeStep.bind(this, {nickname: this.state.nickname, seed: this.state.seed}, 1);
-    // }
-
     render() {
         return (
             <div className="step1">
