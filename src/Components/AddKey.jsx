@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getETHaccount } from '../Actions';
@@ -220,6 +221,10 @@ class Step3 extends Component {
         }
     }
 
+    createNotification = () => {
+        NotificationManager.success('Copied to clipboard!', '');
+    }
+
     copyLink = (url) => {
         console.log(url);
     }
@@ -246,7 +251,7 @@ class Step3 extends Component {
                                         <h3>{guardian.name}</h3>
                                         <h4>{guardian.community}</h4>
                                         <CopyToClipboard onCopy={() => {this.copyLink(guardian.url)}} text={guardian.url}>
-                                            <span>Copy Link</span>
+                                            <span onClick={this.createNotification}>Copy Link</span>
                                         </CopyToClipboard>
                                     </div>
                                     <div className="fl-20">
@@ -257,6 +262,7 @@ class Step3 extends Component {
                     </div>
                 )}
                 <center><button onClick={() => { this.props.history.push('/add-key/done') }}>DONE</button></center>
+                <NotificationContainer/>
             </div>
         )
     }
