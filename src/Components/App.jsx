@@ -3,7 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Terms from './Terms';
 import Create from './Create';
-import Privacy from './Privacy';
+import Legal from './Legal';
 import Dashboard from './Dashboard';
 import NoWeb3 from './NoWeb3';
 import Wallet from './Wallet';
@@ -27,7 +27,7 @@ class App extends Component {
                             <Route exact path="/web3" component={NoWeb3}/>
                             <Route exact path="/terms" component={Terms}/>
                             <Route exact path="/create" component={Create}/>
-                            <Route exact path="/privacy" component={Privacy}/>
+                            <Route exact path="/legal" component={Legal}/>
                             <Route exact path="/dashboard" component={Dashboard}/>
                             <Route exact path="/recover" component={Recover}/>
                             <Route path="/add-key" component={StepsContainer}/>

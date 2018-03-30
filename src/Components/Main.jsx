@@ -25,7 +25,7 @@ class Main extends Component {
                 <p>A simple, secure way to recover your secret keys and passwords</p>
                 <a href="https://keysplit.io"><p className="learn-more">Learn More</p></a>
                 <button onClick={(e) => {
-                    this.props.history.push('terms')
+                    this.props.history.push('legal')
                 }} className="create-account">CREATE ACCOUNT</button>
             </div>
         )
