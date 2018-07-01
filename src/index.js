@@ -23,10 +23,9 @@ const store = createStore(
 );
 
 ReactDOM.render(
-
     <Provider store={store}>
         <BrowserRouter>
-            <Route path="/" component={GlobalContainer} />
+            <Route path="/" component={GlobalContainer}/>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
