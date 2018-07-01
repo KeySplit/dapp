@@ -1,8 +1,4 @@
 .header {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-
     position: relative;
     padding: 20px;
 
@@ -12,7 +8,6 @@
     }
 
     .back{
-
         i {
             border: solid $teal;
             border-width: 0 3px 3px 0;
@@ -28,7 +23,6 @@
     }
 
     .logo{
-
         grid-column-start: 1;
         grid-column-end: 8;
 
@@ -49,6 +43,7 @@
 
     .menu{
         grid-column: 10;
+
         img{
             float: right;
             height: 30px;

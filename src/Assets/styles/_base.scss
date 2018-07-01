@@ -14,16 +14,8 @@ a{
 .main-container{
     position: relative;
     box-sizing: border-box;
-    width: 100%;
+    max-width: 34em;
     height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
-    grid-template-rows: 60px auto;
-    grid-template-areas:
-        "header header header header"
-        "main main main main";
-}
-
-.main {
-    grid-area: main;
+    margin: 0 auto;
+    text-align: center;
 }

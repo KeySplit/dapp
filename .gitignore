@@ -2,3 +2,7 @@ node_modules
 .DS_Store
 back/node_modules
 .env
+
+# Editor
+.idea
+.vscode

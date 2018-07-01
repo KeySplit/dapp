@@ -247,14 +247,12 @@ class Step3 extends Component {
                         <div className="fl-offset-5 fl-90">
                             <div className="share-tile">
                                 <div className="fl-row">
-                                    <div className="fl-80">
+                                    <div className="fl-100">
                                         <h3>{guardian.name}</h3>
                                         <h4>{guardian.community}</h4>
                                         <CopyToClipboard onCopy={() => {this.copyLink(guardian.url)}} text={guardian.url}>
                                             <span onClick={this.createNotification}>Copy Link</span>
                                         </CopyToClipboard>
-                                    </div>
-                                    <div className="fl-20">
                                     </div>
                                 </div>
                             </div>
